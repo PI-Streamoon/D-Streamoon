@@ -12,6 +12,11 @@ import controllers.UsuarioController;
 public class Login {
     private String email;
     private String senha;
+    private Boolean selecionadoCPU;
+    private Boolean selecionadoRAM;
+    private Boolean selecionadoDisco;
+    private Boolean selecionadoUpload;
+    private Boolean selecionadoDownload;
 
     Conexao conexao;
     JdbcTemplate con;
@@ -24,6 +29,11 @@ public class Login {
         this.conexao = new Conexao();
         this.con = conexao.getConexaoDoBanco();
         this.usuarios = new ArrayList<>();
+        this.selecionadoCPU = false;
+        this.selecionadoRAM = false;
+        this.selecionadoDisco = false;
+        this.selecionadoUpload = false;
+        this.selecionadoDownload = false;
     }
 
     public void menuLogin() {
@@ -37,7 +47,7 @@ public class Login {
                 """);
     }
 
-    public void menuMonitoramento(Boolean selecionadoCPU, Boolean selecionadoRAM, Boolean selecionadoDisco, Boolean selecionadoUpload, Boolean selecionadoDownload ) {
+    public void menuMonitoramento() {
         System.out.println("""
                 @======================================@\s
                 |  Escolha o que deseja monitorar      |
@@ -104,4 +114,33 @@ public class Login {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public void selecionarCPU(){
+        this.selecionadoCPU = !selecionadoCPU;
+    }
+
+    public void selecionarRAM(){
+        this.selecionadoRAM = !selecionadoRAM;
+    }
+
+    public void selecionarDisco(){
+        this.selecionadoDisco = !selecionadoDisco;
+    }
+
+    public void selecionarUpload(){
+        this.selecionadoUpload = !selecionadoUpload;
+    }
+
+    public void selecionarDownload(){
+        this.selecionadoDownload = !selecionadoDownload;
+    }
+
+    public void selecionarTodos(){
+        this.selecionadoCPU = true;
+        this.selecionadoRAM = true;
+        this.selecionadoDisco = true;
+        this.selecionadoUpload = true;
+        this.selecionadoDownload = true;
+    }
+
 }

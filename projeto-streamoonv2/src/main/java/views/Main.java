@@ -24,22 +24,19 @@ public class Main {
         } while (opcaoEscolhida != 2);
 
         do {
-            Boolean selecionadoCPU = false;
-            Boolean selecionadoRAM = false;
-            Boolean selecionadoDisco = false;
-            Boolean selecionadoUpload = false;
-            Boolean selecionadoDownload = false;
-            login.menuMonitoramento(selecionadoCPU, selecionadoRAM, selecionadoDisco, selecionadoUpload, selecionadoDownload);
+
+            login.menuMonitoramento();
             opcaoEscolhida = leitor.nextInt();
 
             switch (opcaoEscolhida){
-                case 1 -> selecionadoCPU = !selecionadoCPU;
-                case 2 -> selecionadoRAM = !selecionadoRAM;
-                case 3 -> selecionadoDisco = !selecionadoDisco;
-                case 4 -> selecionadoUpload = !selecionadoUpload;
-                case 5 -> selecionadoDownload = !selecionadoDownload;
-                case 6 -> selecionadoCPU = !selecionadoCPU;
+                case 1 -> login.selecionarCPU();
+                case 2 -> login.selecionarRAM();
+                case 3 -> login.selecionarDisco();
+                case 4 -> login.selecionarUpload();
+                case 5 -> login.selecionarDownload();
+                case 6 -> login.selecionarTodos();
             }
+
         } while(opcaoEscolhida != 7);
 
 
