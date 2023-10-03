@@ -1,21 +1,22 @@
 package views;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import sptech.school.Conexao;
-import sptech.school.Usuario;
+import dao.Conexao;
+import views.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import controllers.LoginController;
+import controllers.UsuarioController;
 
 public class Login {
     private String email;
     private String senha;
+
     Conexao conexao;
     JdbcTemplate con;
     List<Usuario> usuarios;
-    LoginController loginController = new LoginController();
+    UsuarioController usuarioController = new UsuarioController();
 
     public Login() {
         this.email = null;
@@ -36,20 +37,25 @@ public class Login {
                 """);
     }
 
-    public void menuMonitoramento() {
+    public void menuMonitoramento(Boolean selecionadoCPU, Boolean selecionadoRAM, Boolean selecionadoDisco, Boolean selecionadoUpload, Boolean selecionadoDownload ) {
         System.out.println("""
-                @======================================@
+                @======================================@\s
                 |  Escolha o que deseja monitorar      |
                 @--------------------------------------@
-                |   1 - CPU                            |
-                |   2 - Memória RAM                    |
-                |   3 - Disco                          |
-                |   4 - Upload                         |
-                |   5 - Download                       |
-                |   6 - Todos                          |
-                |   7 - Iniciar Monitoramento          |
+                   1 - CPU       %s                     \s
+                   2 - Memória RAM    %s                \s
+                   3 - Disco      %s                    \s
+                   4 - Upload     %s                    \s
+                   5 - Download   %s                    \s
+                   6 - Todos                            \s
+                   7 - Iniciar Monitoramento            \s
                 @======================================@
-                """);
+                """.formatted(selecionadoCPU ? "[selecionado]": "[não selecionado]",
+                              selecionadoRAM ? "[selecionado]": "[não selecionado]",
+                              selecionadoDisco ? "[selecionado]": "[não selecionado]",
+                              selecionadoUpload ? "[selecionado]": "[não selecionado]",
+                              selecionadoDownload ? "[selecionado]": "[não selecionado]"
+                ));
     }
 
     public views.Usuario entrar() {
@@ -63,7 +69,7 @@ public class Login {
         String senha = leitor.nextLine();
         this.senha = senha;
 
-        List<views.Usuario> usuarioBuscado = loginController.buscarUsuario(email, senha);
+        List<views.Usuario> usuarioBuscado = usuarioController.buscarUsuario(email, senha);
 
         if (usuarioBuscado.isEmpty()) {
 

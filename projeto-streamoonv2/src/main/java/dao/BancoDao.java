@@ -2,7 +2,7 @@ package dao;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import sptech.school.Conexao;
+import dao.Conexao;
 
 import java.util.List;
 
