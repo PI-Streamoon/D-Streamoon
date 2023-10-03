@@ -8,8 +8,8 @@ public class Conexao {
     public Conexao() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setDatabaseName("streamoon");
-        dataSource.setUser("root");
-        dataSource.setPassword("Kevyn@9566784062@");
+        dataSource.setUser("StreamoonUser");
+        dataSource.setPassword("Moon2023");
 
         conexaoDoBanco = new JdbcTemplate(dataSource);
     }
