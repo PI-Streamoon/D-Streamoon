@@ -1,6 +1,5 @@
 package views;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import sptech.school.Conexao;
 import sptech.school.Usuario;
@@ -8,6 +7,7 @@ import sptech.school.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import controllers.LoginController;
 
 public class Login {
     private String email;
@@ -15,6 +15,7 @@ public class Login {
     Conexao conexao;
     JdbcTemplate con;
     List<Usuario> usuarios;
+    LoginController loginController = new LoginController();
 
     public Login() {
         this.email = null;
@@ -51,7 +52,7 @@ public class Login {
                 """);
     }
 
-    public Usuario entrar() {
+    public views.Usuario entrar() {
 
         Scanner leitor = new Scanner(System.in);
         System.out.println("Insira o seu e-mail:");
@@ -62,7 +63,7 @@ public class Login {
         String senha = leitor.nextLine();
         this.senha = senha;
 
-        List<Usuario> usuarioBuscado = buscarUsuario(email, senha);
+        List<views.Usuario> usuarioBuscado = loginController.buscarUsuario(email, senha);
 
         if (usuarioBuscado.isEmpty()) {
 
@@ -75,17 +76,12 @@ public class Login {
             return null;
 
         } else {
-            System.out.println(usuarioBuscado.get(0));
+            System.out.println(usuarioBuscado);
             return usuarioBuscado.get(0);
         }
     }
 
-    public List<Usuario> buscarUsuario(String email, String senha){
-        this.usuarios = con.query(
-                "SELECT * FROM usuario WHERE email = ? AND senha = ?",
-                new BeanPropertyRowMapper<>(Usuario.class), email, senha);
-        return usuarios;
-    }
+
 
     public String getEmail() {
         return email;
