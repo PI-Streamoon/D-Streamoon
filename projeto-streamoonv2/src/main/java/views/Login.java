@@ -92,7 +92,7 @@ public class Login {
             return null;
 
         } else {
-            System.out.println(usuarioBuscado);
+            System.out.println(usuarioBuscado.get(0));
             return usuarioBuscado.get(0);
         }
     }

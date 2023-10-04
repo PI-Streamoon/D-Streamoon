@@ -1,6 +1,5 @@
 package controllers;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import views.Usuario;
@@ -8,6 +7,7 @@ import models.UsuarioModel;
 import java.util.ArrayList;
 import java.util.List;
 import dao.Conexao;
+
 
 public class UsuarioController {
 
@@ -24,12 +24,7 @@ public class UsuarioController {
         this.usuarios = new ArrayList<>();
     }
 
-    public List<Usuario> buscarUsuario(String email, String senha){
-        this.usuarios = con.query(
-                usuarioModel.exibirUsuario(),
-                new BeanPropertyRowMapper<>(Usuario.class), email, senha);
-
-        return usuarios;
+    public void buscarUsuario(String email, String senha){
+        usuarioModel.buscarUsuario();
     }
-
 }
