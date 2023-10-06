@@ -1,24 +1,26 @@
 package models;
 
+import dao.RegistroDao;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 public class RegistroModel {
-    public String SelectAllRegistrosFromView() {
-        return "SELECT * FROM tabelaRegistros LIMIT 100;";
+    private LocalDateTime dataHora;
+    private Double registro;
+    private Integer fkComponenteServidor;
+
+    private RegistroDao registroDao;
+
+    public RegistroModel() {
+        this.registroDao  = new RegistroDao();
     }
 
-    public String SelectAllRegistrosOrderByComponente() {
-        return "SELECT * FROM tabelaRegistros WHERE Componente = '?' LIMIT 100;";
+    public List<RegistroModel> pegarUltimosCemDados(){
+        return registroDao.pegarUltimosCemDados();
     }
 
-    public String SelectRegistrosFiltrados(){
-        return "SELECT r.idRegistro, r.registro, r.dtHora, c.nome AS nomeComponente, um.nomeMedida\n" +
-                "FROM registro r\n" +
-                "LEFT JOIN componenteServidor cs ON r.fkComponenteServidor = cs.idComponenteServidor\n" +
-                "LEFT JOIN componente c ON cs.fkComponente = c.idComponente\n" +
-                "LEFT JOIN unidadeMedida um ON c.fkUnidadeMedida = um.idUnidadeMedida\n" +
-                "ORDER BY um.nomeMedida, c.nome;";
-    }
-
-    public String SelectAllRegistrosOrderByServidor(){
-        return "SELECT * FROM tabelaRegistros WHERE idServidor = ? LIMIT 100;";
+    public List<RegistroModel> pegarDadosporComponente(String componente){
+        return registroDao.pegarDadosporComponente(componente);
     }
 }
