@@ -69,6 +69,17 @@ public class Login {
                 ));
     }
 
+    public void menuDados(){
+        String dados = registroController.getDados(selecionadoCPU, selecionadoRAM, selecionadoDisco, selecionadoUpload, selecionadoDownload);
+        System.out.println("""
+                @==================================@
+                |         Dados Captados da:       |
+                @==================================@
+                %s
+                @==================================@
+                """.formatted(dados));
+    }
+
     public views.Usuario entrar() {
 
         Scanner leitor = new Scanner(System.in);
@@ -90,11 +101,9 @@ public class Login {
                     |   E-mail não cadastrado!             |
                     @--------------------------------------@
                     """);
-            return null;
 
         } else {
             System.out.println("O usuário informado não existe no sistema!");
-            return null;
         }
     }
 

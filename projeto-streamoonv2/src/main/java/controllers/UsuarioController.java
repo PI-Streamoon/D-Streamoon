@@ -10,11 +10,7 @@ import dao.Conexao;
 
 
 public class UsuarioController {
-
-    private Conexao conexao;
-    private JdbcTemplate con;
-
-    private List<Usuario> usuarios;
+    private List<UsuarioModel> usuarios;
 
     public UsuarioController() {
         this.conexao = new Conexao();
@@ -34,4 +30,5 @@ public class UsuarioController {
 
         return validacao;
     }
+
 }

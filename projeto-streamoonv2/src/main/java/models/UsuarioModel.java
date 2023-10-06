@@ -18,8 +18,6 @@ public class UsuarioModel {
     private UsuarioDao usuarioDao;
 
 
-
-
     public UsuarioModel() {
         this.usuarioDao = new UsuarioDao();
     }

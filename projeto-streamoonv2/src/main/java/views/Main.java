@@ -3,7 +3,6 @@ package views;
 // Necessita de import pois estão em pacotes diferetes
 
 import java.util.Scanner;
-import views.Login;
 
 public class Main {
     public static void main(String[] args) {
@@ -39,6 +38,6 @@ public class Main {
 
         } while(opcaoEscolhida != 7);
 
-
+        login.menuDados();
     }
 }
