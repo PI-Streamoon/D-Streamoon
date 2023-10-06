@@ -1,13 +1,10 @@
 package views;
 
-import models.UsuarioModel;
-import org.springframework.jdbc.core.JdbcTemplate;
-import dao.Conexao;
-import views.Usuario;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import controllers.RegistroController;
 import controllers.UsuarioController;
 
 public class Login {
@@ -19,16 +16,13 @@ public class Login {
     private Boolean selecionadoUpload;
     private Boolean selecionadoDownload;
 
-    Conexao conexao;
-    JdbcTemplate con;
     List<Usuario> usuarios;
     UsuarioController usuarioController = new UsuarioController();
+    RegistroController registroController = new RegistroController();
 
     public Login() {
         this.email = null;
         this.senha = null;
-        this.conexao = new Conexao();
-        this.con = conexao.getConexaoDoBanco();
         this.usuarios = new ArrayList<>();
         this.selecionadoCPU = false;
         this.selecionadoRAM = false;
@@ -53,13 +47,13 @@ public class Login {
                 @======================================@\s
                 |  Escolha o que deseja monitorar      |
                 @--------------------------------------@
-                   1 - CPU       %s                     \s
-                   2 - Memória RAM    %s                \s
-                   3 - Disco      %s                    \s
-                   4 - Upload     %s                    \s
-                   5 - Download   %s                    \s
-                   6 - Todos                            \s
-                   7 - Iniciar Monitoramento            \s
+                   1 - CPU           %s                \s
+                   2 - Memória RAM   %s                \s
+                   3 - Disco         %s                \s
+                   4 - Upload        %s                \s
+                   5 - Download      %s                \s
+                   6 - Todos                           \s
+                   7 - Iniciar Monitoramento           \s
                 @======================================@
                 """.formatted(selecionadoCPU ? "[selecionado]": "[não selecionado]",
                               selecionadoRAM ? "[selecionado]": "[não selecionado]",
@@ -80,7 +74,7 @@ public class Login {
                 """.formatted(dados));
     }
 
-    public views.Usuario entrar() {
+    public void entrar() {
 
         Scanner leitor = new Scanner(System.in);
         System.out.println("Insira o seu e-mail:");
@@ -126,6 +120,7 @@ public class Login {
     }
 
     public void selecionarCPU(){
+
         this.selecionadoCPU = !selecionadoCPU;
     }
 
@@ -153,4 +148,23 @@ public class Login {
         this.selecionadoDownload = true;
     }
 
+    public Boolean getSelecionadoCPU() {
+        return selecionadoCPU;
+    }
+
+    public Boolean getSelecionadoRAM() {
+        return selecionadoRAM;
+    }
+
+    public Boolean getSelecionadoDisco() {
+        return selecionadoDisco;
+    }
+
+    public Boolean getSelecionadoUpload() {
+        return selecionadoUpload;
+    }
+
+    public Boolean getSelecionadoDownload() {
+        return selecionadoDownload;
+    }
 }

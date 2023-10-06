@@ -2,9 +2,7 @@ package models;
 
 import dao.UsuarioDao;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class UsuarioModel {
     private int id;
