@@ -15,27 +15,17 @@ public class UsuarioModel {
     private String cpf;
     private String email;
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", empresa=" + empresa +
-                ", admin=" + admin +
-                ", nome='" + nome + '\'' +
-                ", senha='" + senha + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
     private UsuarioDao usuarioDao;
+
+
+
 
     public UsuarioModel() {
         this.usuarioDao = new UsuarioDao();
     }
 
-    public List<UsuarioModel> buscarUsuario() {
-        return usuarioModels;
+    public List<UsuarioModel> buscarUsuario(UsuarioModel usuarioModel) {
+        return usuarioDao.buscarUsuario(usuarioModel);
     }
 
     public int getId() {
@@ -100,5 +90,18 @@ public class UsuarioModel {
 
     public void setUsuarioDao(UsuarioDao usuarioDao) {
         this.usuarioDao = usuarioDao;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", empresa=" + empresa +
+                ", admin=" + admin +
+                ", nome='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

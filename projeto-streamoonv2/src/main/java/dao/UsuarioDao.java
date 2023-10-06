@@ -17,11 +17,8 @@ public class UsuarioDao {
         String email = usuarioModel.getEmail();
         String senha = usuarioModel.getSenha();
 
-
-        con.query(
+        return con.query(
                 "SELECT nome,senha,cpf,email  FROM usuario WHERE email = ? AND senha = ?;",
-                new BeanPropertyRowMapper<>(UsuarioModel.class), email, senha).toString();
-
-        return null;
+                new BeanPropertyRowMapper<>(UsuarioModel.class), email, senha);
     }
 }

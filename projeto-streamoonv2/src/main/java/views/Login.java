@@ -1,5 +1,6 @@
 package views;
 
+import models.UsuarioModel;
 import org.springframework.jdbc.core.JdbcTemplate;
 import dao.Conexao;
 import views.Usuario;
@@ -79,11 +80,11 @@ public class Login {
         String senha = leitor.nextLine();
         this.senha = senha;
 
-        List<views.Usuario> usuarioBuscado = usuarioController.buscarUsuario(email, senha);
+        Boolean isEmpty = usuarioController.buscarUsuario(email, senha);
 
-        if (usuarioBuscado.isEmpty()) {
+        if (isEmpty.equals(true)) {
 
-            System.out.println(usuarioBuscado);
+            // System.out.println(usuarioBuscado);
             System.out.println("""
                     @--------------------------------------@
                     |   E-mail não cadastrado!             |
@@ -92,8 +93,8 @@ public class Login {
             return null;
 
         } else {
-            System.out.println(usuarioBuscado.get(0));
-            return usuarioBuscado.get(0);
+            System.out.println("O usuário informado não existe no sistema!");
+            return null;
         }
     }
 

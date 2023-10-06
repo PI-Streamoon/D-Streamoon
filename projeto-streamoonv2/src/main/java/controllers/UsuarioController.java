@@ -11,20 +11,27 @@ import dao.Conexao;
 
 public class UsuarioController {
 
-    private UsuarioModel usuarioModel;
     private Conexao conexao;
     private JdbcTemplate con;
 
     private List<Usuario> usuarios;
 
     public UsuarioController() {
-        this.usuarioModel = new UsuarioModel();
         this.conexao = new Conexao();
         this.con = conexao.getConexaoDoBanco();
         this.usuarios = new ArrayList<>();
     }
 
-    public void buscarUsuario(String email, String senha){
-        usuarioModel.buscarUsuario();
+    public Boolean buscarUsuario(String email, String senha){
+        UsuarioModel usuarioModel = new UsuarioModel();
+        usuarioModel.setEmail(email);
+        usuarioModel.setEmail(senha);
+        List<UsuarioModel> listaUsers = usuarioModel.buscarUsuario(usuarioModel);
+
+        Boolean validacao = false;
+
+
+
+        return validacao;
     }
 }
