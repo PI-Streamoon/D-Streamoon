@@ -13,6 +13,7 @@ public class UsuarioDao {
     public UsuarioDao(){
         this.con = conexao.getConexaoDoBanco();
     }
+
     public List<UsuarioModel> buscarUsuario(UsuarioModel usuarioModel){
         String email = usuarioModel.getEmail();
         String senha = usuarioModel.getSenha();

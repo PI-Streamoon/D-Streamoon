@@ -1,17 +1,26 @@
 package models;
 
+import dao.ServidorDao;
+import java.util.List;
+
 public class ServidorModel {
+    private Integer idServidor;
+    private Integer fkLocal;
+    private ServidorDao servidorDao = new ServidorDao();
 
-    public String servidores() {
-       return "";
+    public ServidorModel() {
+        this.servidorDao = new ServidorDao();
     }
 
-    public String servidorEspecifico() {
-        return "";
+    public List<ServidorModel> pegarServidores(){
+        return servidorDao.pegarServidores();
     }
 
-    public String infosSrevidores() {
-        return "SELECT * FROM infoservidor";
+    public List<ServidorModel> pegarServidoresPorId(int id){
+        return servidorDao.pegarServidoresPorId(id);
     }
 
+    public List<ServidorModel> pegarServidoresPorLocal(int idLocal){
+        return servidorDao.pegarServidoresPorId(idLocal);
+    }
 }

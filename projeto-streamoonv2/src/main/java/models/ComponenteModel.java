@@ -1,16 +1,21 @@
 package models;
 
+import dao.ComponenteDao;
+
+import java.util.List;
+
 public class ComponenteModel {
+    private String nome;
+    private Integer fkMedida;
+    private Integer idComponente;
+    private ComponenteDao componenteDao;
 
-    public String todosComponentes() {
-        return "SELECT * FROM componente;";
+    public ComponenteModel() {
+        componenteDao = new ComponenteDao();
     }
 
-    public String componentePorNome(){
-        return "SELECT * FROM componente WHERE nome = '?';";
+    public List<ComponenteModel> pegarComponentePorNome(String nome){
+        return componenteDao.pegarComponentePorNome(nome);
     }
 
-    public String componentePorUnidadeMedida(){
-        return "SELECT * FROM componente WHERE fkUnidadeMedida = ?;";
-    }
 }

@@ -14,6 +14,7 @@ public class RegistroController {
         if(ram){
             conjuntoDados+="RAM: 78%%\n";
         }
+
         if(disco){
             conjuntoDados+="Disco: 67%%\n";
         }
