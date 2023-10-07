@@ -18,4 +18,12 @@ public class ComponenteModel {
         return componenteDao.pegarComponentePorNome(nome);
     }
 
+    public List<ComponenteModel> pegarTodosComponente(){
+        return componenteDao.pegarTodosComponente();
+    }
+
+    public List<ComponenteModel> pegarComponenteServidor(int id){
+        return componenteDao.pegarComponenteServidor(id);
+    }
+
 }
