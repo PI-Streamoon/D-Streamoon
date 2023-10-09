@@ -26,23 +26,23 @@ public class RegistroModel {
         return registroDao.pegarDadosporComponente(componente);
     }
 
-    public List<RegistroModel> inserirCPU(Double cpu, Integer fkComponente){
+    public Integer inserirCPU(Double cpu, Integer fkComponente){
         return registroDao.inserirCPU(cpu, fkComponente);
     }
 
-    public List<RegistroModel> inserirRAM(Double ram,Integer fkComponente) {
+    public Integer inserirRAM(Double ram,Integer fkComponente) {
         return registroDao.inserirRAM(ram, fkComponente);
     }
 
-    public List<RegistroModel> inserirDisco(Double disco, Integer fkComponente) {
+    public Integer inserirDisco(Double disco, Integer fkComponente) {
         return registroDao.inserirDisco(disco, fkComponente);
     }
 
-    public List<RegistroModel> inserirUpload(Double upload, Integer fkComponente) {
+    public Integer inserirUpload(Double upload, Integer fkComponente) {
         return registroDao.inserirUpload(upload, fkComponente);
     }
 
-    public List<RegistroModel> inserirDownload(Double download, Integer fkComponente) {
+    public Integer inserirDownload(Double download, Integer fkComponente) {
         return registroDao.inserirDownload(download, fkComponente);
     }
 

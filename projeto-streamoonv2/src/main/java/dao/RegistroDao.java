@@ -16,7 +16,6 @@ public class RegistroDao {
     private LocalDateTime horario;
     private DateTimeFormatter formatter;
     private Locale local;
-    private List<RegistroModel> lista = new ArrayList<>();
     private ComponenteDao componenteDao;
 
     public RegistroDao(){
@@ -39,38 +38,34 @@ public class RegistroDao {
                 new BeanPropertyRowMapper<>(RegistroModel.class), componente);
     }
 
-    public List<RegistroModel> inserirCPU(Double cpu, Integer fkComponente) {
+    public Integer inserirCPU(Double cpu, Integer fkComponente) {
         String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
-        con.update(insert, cpu, formatter.format(horario), fkComponente);
-        return lista;
+        return con.update(insert, cpu, formatter.format(horario), fkComponente);
     }
 
-    public List<RegistroModel> inserirRAM(Double ram, Integer fkComponente) {
+    public Integer inserirRAM(Double ram, Integer fkComponente) {
         String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
-        con.update(insert, ram, formatter.format(horario), fkComponente);
-        return lista;
+        return con.update(insert, ram, formatter.format(horario), fkComponente);
     }
 
-    public List<RegistroModel> inserirDisco(Double disco, Integer fkComponente) {
+    public Integer inserirDisco(Double disco, Integer fkComponente) {
         String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
-        con.update(insert, disco, formatter.format(horario), fkComponente);
-        return lista;
+        return con.update(insert, disco, formatter.format(horario), fkComponente);
     }
 
-    public List<RegistroModel> inserirUpload(Double upload, Integer fkComponente) {
+    public Integer inserirUpload(Double upload, Integer fkComponente) {
         String insert = "INSERT INTO registro (registro, fkComponenteServidor, dtHora) VALUES (?, ?, ?)";
-        con.update(insert, upload, formatter.format(horario), fkComponente);
-        return lista;
+        return con.update(insert, upload, formatter.format(horario), fkComponente);
+
     }
 
-    public List<RegistroModel> inserirDownload(Double download, Integer fkComponente) {
+    public Integer inserirDownload(Double download, Integer fkComponente) {
         String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
-        con.update(insert, download, formatter.format(horario), fkComponente);
-        return lista;
+        return con.update(insert, download, formatter.format(horario), fkComponente);
     }
 
-    public DateTimeFormatter getFormatter() {
-        return formatter;
+    public String getFormatter() {
+        return formatter.format(horario);
     }
 
 }
