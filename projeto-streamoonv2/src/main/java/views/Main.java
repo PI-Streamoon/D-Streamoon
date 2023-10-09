@@ -2,10 +2,15 @@ package views;
 
 // Necessita de import pois estão em pacotes diferetes
 
+import controllers.RegistroController;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        RegistroController registroController = new RegistroController();
+
+        registroController.exibirDados();
 
         Login login = new Login();
         Integer opcaoEscolhida;
