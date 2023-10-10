@@ -20,9 +20,8 @@ public class ComponenteDao {
 
     public List<ComponenteModel> pegarComponentePorNome(String componente){
         dadosComponente = (con.query(
-                "SELECT idComponenteServidor FROM componenteservidor JOIN " +
-                        "componente ON fkComponente = idComponente WHERE nome = '"+componente+"' LIMIT 1",
-                new BeanPropertyRowMapper<>(ComponenteModel.class)));
+                "SELECT idComponenteServidor FROM componenteservidor JOIN componente ON fkComponente = idComponente WHERE nome = ? LIMIT 1",
+                new BeanPropertyRowMapper<>(ComponenteModel.class), componente));
 
         return dadosComponente;
     }

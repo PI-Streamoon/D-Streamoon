@@ -3,6 +3,7 @@ package controllers;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.Disco;
 import com.github.britooo.looca.api.group.discos.DiscoGrupo;
+import com.github.britooo.looca.api.group.discos.Volume;
 import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.group.rede.Rede;
@@ -66,31 +67,42 @@ public class RegistroController {
     }
 
     public void inserirDisco() {
-
         List<Disco> discos = grupoDeDiscos.getDiscos();
         Double totalUtilizado = 0.0;
         Double total = 0.0;
 
-//utilizado*100/total
+        Disco discoTeste = grupoDeDiscos.getDiscos().get(0);
+        System.out.println(discoTeste);
+        List<Volume> discoTeste1 = grupoDeDiscos.getVolumes();
+        System.out.println(discoTeste1);
+        Volume discoTeste2 = grupoDeDiscos.getVolumes().get(0);
+        System.out.println(discoTeste2);
+
         for (ComponenteModel model : componenteModel.pegarComponentePorNome("Disco")) {
             componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
         }
 
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
+
+
         for (Disco discoAtual : discos) {
-            registroModel.inserirDadosBanco(discoAtual.getLeituras().doubleValue(), fkComponent);
             total += discoAtual.getTamanho();
             totalUtilizado += discoAtual.getTamanhoAtualDaFila();
+
+            System.out.println(discoAtual);
         }
-        Double totalPercent = totalUtilizado*100/ total;
+
+
+        Double totalPercent = (totalUtilizado*100) / total;
+        registroModel.inserirDadosBanco(totalPercent, fkComponent);
 
     }
 
     public void inserirUpload() {
-        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(0);
+        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(3);
 
-        Double upload = Double.valueOf(redeEscolhida.getBytesRecebidos()/1024000);
+        Double upload = Double.valueOf(redeEscolhida.getBytesRecebidos()/(1024* 1024));
 
         for (ComponenteModel model : componenteModel.pegarComponentePorNome("Upload")) {
             componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
@@ -102,9 +114,9 @@ public class RegistroController {
     }
 
     public void inserirDownload() {
-        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
+        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(3);
 
-        Double download = Double.valueOf(redeEscolhida.getBytesEnviados()/1024000);
+        Double download = Double.valueOf(redeEscolhida.getBytesEnviados()/(1024* 1024));
 
         for (ComponenteModel model : componenteModel.pegarComponentePorNome("Download")) {
             componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
@@ -146,5 +158,13 @@ public class RegistroController {
 
         return conjuntoDados;
 
+    }
+
+    public void exibirTituloMenu(){
+        System.out.println("""
+                @==================================@
+                |         Dados Captados           |
+                @==================================@
+                    """);
     }
 }

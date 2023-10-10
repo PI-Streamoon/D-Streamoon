@@ -67,16 +67,12 @@ public class Login {
     public void menuDados(){
         String dados = registroController.getDados(selecionadoCPU, selecionadoRAM, selecionadoDisco, selecionadoUpload, selecionadoDownload);
         System.out.println("""
-                @==================================@
-                |         Dados Captados           |
-                @==================================@
                 %s
                 @==================================@
                 """.formatted(dados));
     }
 
-    public void entrar() {
-
+    public Boolean entrar() {
         Scanner leitor = new Scanner(System.in);
         System.out.println("Insira o seu e-mail:");
         String email = leitor.nextLine();
@@ -86,23 +82,14 @@ public class Login {
         String senha = leitor.nextLine();
         this.senha = senha;
 
-        Boolean isEmpty = usuarioController.buscarUsuario(email, senha);
+        Boolean usuarioExiste = usuarioController.buscarUsuario(email, senha);
 
-        if (isEmpty.equals(true)) {
-
-            // System.out.println(usuarioBuscado);
-            System.out.println("""
-                    @--------------------------------------@
-                    |   E-mail não cadastrado!             |
-                    @--------------------------------------@
-                    """);
-
+        if (usuarioExiste.equals(false)) {
+            return true;
         } else {
-            System.out.println("O usuário informado não existe no sistema!");
+            return false;
         }
     }
-
-
 
     public String getEmail() {
         return email;

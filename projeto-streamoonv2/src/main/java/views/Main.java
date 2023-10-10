@@ -2,13 +2,17 @@ package views;
 
 // Necessita de import pois estão em pacotes diferetes
 
+import controllers.RegistroController;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
         Login login = new Login();
-        Integer opcaoEscolhida;
+        RegistroController registroController = new RegistroController();
+        int opcaoEscolhida;
+        Boolean loginValidado;
         Scanner leitor = new Scanner(System.in);
 
         do {
@@ -16,11 +20,16 @@ public class Main {
             opcaoEscolhida = leitor.nextInt();
 
             if (opcaoEscolhida == 1) {
-                login.entrar();
-                break;
+                loginValidado = login.entrar();
+
+                if(loginValidado){
+                    break;
+                }
+
             }
 
         } while (opcaoEscolhida != 2);
+
 
         do {
 
@@ -38,6 +47,13 @@ public class Main {
 
         } while(opcaoEscolhida != 7);
 
-        login.menuDados();
+        registroController.exibirTituloMenu();
+
+        do{
+
+           login.menuDados();
+
+        } while (true);
+
     }
 }

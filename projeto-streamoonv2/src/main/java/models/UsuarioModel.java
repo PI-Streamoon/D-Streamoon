@@ -16,10 +16,8 @@ public class UsuarioModel {
     private UsuarioDao usuarioDao;
 
 
-    public UsuarioModel(String email, String senha) {
+    public UsuarioModel() {
         this.usuarioDao = new UsuarioDao();
-        this.email = email;
-        this.senha = senha;
     }
 
     public List<UsuarioModel> buscarUsuario(UsuarioModel usuarioModel) {
