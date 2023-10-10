@@ -24,9 +24,9 @@ public class RegistroController {
     private final Temperatura temperatura;
     private final DiscoGrupo grupoDeDiscos;
     private final Rede rede;
+    // Fim dos atributos de captura de valores
     private ComponenteModel componenteModel;
     private RegistroModel registroModel;
-    // Fim dos atributos de captura de valores
 
     public RegistroController() {
         this.sistema = looca.getSistema();
@@ -48,7 +48,7 @@ public class RegistroController {
 
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
-        registroModel.inserirCPU(cpu, fkComponent);
+        registroModel.inserirDadosBanco(cpu, fkComponent);
 
     }
 
@@ -61,14 +61,17 @@ public class RegistroController {
 
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
-        registroModel.inserirRAM(ram, fkComponent);
+        registroModel.inserirDadosBanco(ram, fkComponent);
 
     }
 
     public void inserirDisco() {
 
         List<Disco> discos = grupoDeDiscos.getDiscos();
+        Double totalUtilizado = 0.0;
+        Double total = 0.0;
 
+//utilizado*100/total
         for (ComponenteModel model : componenteModel.pegarComponentePorNome("Disco")) {
             componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
         }
@@ -76,8 +79,11 @@ public class RegistroController {
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
         for (Disco discoAtual : discos) {
-            registroModel.inserirDisco(discoAtual.getLeituras().doubleValue(), fkComponent);
+            registroModel.inserirDadosBanco(discoAtual.getLeituras().doubleValue(), fkComponent);
+            total += discoAtual.getTamanho();
+            totalUtilizado += discoAtual.getTamanhoAtualDaFila();
         }
+        Double totalPercent = totalUtilizado*100/ total;
 
     }
 
@@ -92,7 +98,7 @@ public class RegistroController {
 
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
-        registroModel.inserirUpload(upload,fkComponent);
+        registroModel.inserirDadosBanco(upload,fkComponent);
     }
 
     public void inserirDownload() {
@@ -106,7 +112,7 @@ public class RegistroController {
 
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
-        registroModel.inserirDownload(download,fkComponent);
+        registroModel.inserirDadosBanco(download,fkComponent);
 
     }
 

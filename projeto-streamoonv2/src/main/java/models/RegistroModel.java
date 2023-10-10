@@ -19,24 +19,8 @@ public class RegistroModel {
         this.componenteDao = new ComponenteDao();
     }
 
-    public Integer inserirCPU(Double cpu, Integer fkComponente){
-        return registroDao.inserirCPU(cpu, fkComponente);
-    }
-
-    public Integer inserirRAM(Double ram,Integer fkComponente) {
-        return registroDao.inserirRAM(ram, fkComponente);
-    }
-
-    public Integer inserirDisco(Double disco, Integer fkComponente) {
-        return registroDao.inserirDisco(disco, fkComponente);
-    }
-
-    public Integer inserirUpload(Double upload, Integer fkComponente) {
-        return registroDao.inserirUpload(upload, fkComponente);
-    }
-
-    public Integer inserirDownload(Double download, Integer fkComponente) {
-        return registroDao.inserirDownload(download, fkComponente);
+    public Integer inserirDadosBanco(Double registro, Integer fkComponente){
+        return registroDao.inserirDadosBanco(registro, fkComponente);
     }
 
     public List<RegistroModel> selectComponente(String componente) {
@@ -69,6 +53,5 @@ public class RegistroModel {
     @Override
     public String toString() {
         return ""+registro;
-
     }
 }

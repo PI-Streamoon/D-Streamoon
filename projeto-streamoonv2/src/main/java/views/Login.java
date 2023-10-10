@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import controllers.RegistroController;
 import controllers.UsuarioController;
+import models.UsuarioModel;
 
 public class Login {
     private String email;
@@ -16,7 +17,7 @@ public class Login {
     private Boolean selecionadoUpload;
     private Boolean selecionadoDownload;
 
-    List<Usuario> usuarios;
+    List<UsuarioModel> usuarios;
     UsuarioController usuarioController = new UsuarioController();
     RegistroController registroController = new RegistroController();
 

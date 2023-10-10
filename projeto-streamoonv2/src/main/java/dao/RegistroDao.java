@@ -27,34 +27,13 @@ public class RegistroDao {
         this.componenteDao = new ComponenteDao();
     }
 
-    public Integer inserirCPU(Double cpu, Integer fkComponente) {
+    public Integer inserirDadosBanco(Double registro, Integer fkComponente) {
         String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
-        return con.update(insert, cpu, formatter.format(horario), fkComponente);
-    }
-
-    public Integer inserirRAM(Double ram, Integer fkComponente) {
-        String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
-        return con.update(insert, ram, formatter.format(horario), fkComponente);
-    }
-
-    public Integer inserirDisco(Double disco, Integer fkComponente) {
-        String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
-        return con.update(insert, disco, formatter.format(horario), fkComponente);
-    }
-
-    public Integer inserirUpload(Double upload, Integer fkComponente) {
-        String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
-        return con.update(insert, upload, formatter.format(horario), fkComponente);
-
-    }
-
-    public Integer inserirDownload(Double download, Integer fkComponente) {
-        String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
-        return con.update(insert, download, formatter.format(horario), fkComponente);
+        return con.update(insert, registro, formatter.format(horario), fkComponente);
     }
 
     public List<RegistroModel> selectComponente(String componente) {
-        String select = "SELECT Registro FROM tabelaregistros " +
+        String select = "SELECT Registro FROM tabelaRegistros " +
                 "WHERE Componente = '"+componente+"' ORDER BY MomentoRegistro DESC LIMIT 1";
         return con.query(select, new BeanPropertyRowMapper<>(RegistroModel.class));
     }

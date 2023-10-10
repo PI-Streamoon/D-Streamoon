@@ -12,9 +12,8 @@ public class UsuarioController {
     }
 
     public Boolean buscarUsuario(String email, String senha){
-        UsuarioModel usuarioModel = new UsuarioModel();
-        usuarioModel.setEmail(email);
-        usuarioModel.setEmail(senha);
+        UsuarioModel usuarioModel = new UsuarioModel(email, senha);
+
         List<UsuarioModel> listaUsers = usuarioModel.buscarUsuario(usuarioModel);
 
         Boolean validacao = false;
