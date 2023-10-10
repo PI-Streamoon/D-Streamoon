@@ -8,6 +8,8 @@ import java.util.List;
 public class RegistroModel {
     private LocalDateTime dataHora;
     private Double registro;
+    private String componenteRegistrado;
+    private String simbulo;
     private Integer fkComponenteServidor;
     private RegistroDao registroDao;
     private ComponenteDao componenteDao;
@@ -15,14 +17,6 @@ public class RegistroModel {
     public RegistroModel() {
         this.registroDao  = new RegistroDao();
         this.componenteDao = new ComponenteDao();
-    }
-
-    public List<RegistroModel> pegarUltimosCemDados(){
-        return registroDao.pegarUltimosCemDados();
-    }
-
-    public List<RegistroModel> pegarDadosporComponente(String componente){
-        return registroDao.pegarDadosporComponente(componente);
     }
 
     public Integer inserirCPU(Double cpu, Integer fkComponente){
@@ -45,12 +39,36 @@ public class RegistroModel {
         return registroDao.inserirDownload(download, fkComponente);
     }
 
+    public List<RegistroModel> selectComponente(String componente) {
+        return registroDao.selectComponente(componente);
+    }
+    public Double getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(Double registro) {
+        this.registro = registro;
+    }
+
+    public String getComponenteRegistrado() {
+        return componenteRegistrado;
+    }
+
+    public void setComponenteRegistrado(String componenteRegistrado) {
+        this.componenteRegistrado = componenteRegistrado;
+    }
+
+    public String getSimbulo() {
+        return simbulo;
+    }
+
+    public void setSimbulo(String simbulo) {
+        this.simbulo = simbulo;
+    }
+
     @Override
     public String toString() {
-        return "RegistroModel{" +
-                "dataHora=" + registroDao.getFormatter() +
-                ", registro=" + registro +
-                ", registroDao=" + registroDao +
-                '}';
+        return ""+registro;
+
     }
 }

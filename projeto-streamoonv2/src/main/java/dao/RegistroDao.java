@@ -27,18 +27,6 @@ public class RegistroDao {
         this.componenteDao = new ComponenteDao();
     }
 
-    public List<RegistroModel> pegarUltimosCemDados(){
-        return con.query(
-                "SELECT * FROM tabelaRegistros LIMIT 100;",
-                new BeanPropertyRowMapper<>(RegistroModel.class));
-    }
-
-    public List<RegistroModel> pegarDadosporComponente(String componente){
-        return con.query(
-                "SELECT * FROM tabelaRegistros WHERE Componente = '?' LIMIT 100;",
-                new BeanPropertyRowMapper<>(RegistroModel.class), componente);
-    }
-
     public Integer inserirCPU(Double cpu, Integer fkComponente) {
         String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
         return con.update(insert, cpu, formatter.format(horario), fkComponente);
@@ -55,7 +43,7 @@ public class RegistroDao {
     }
 
     public Integer inserirUpload(Double upload, Integer fkComponente) {
-        String insert = "INSERT INTO registro (registro, fkComponenteServidor, dtHora) VALUES (?, ?, ?)";
+        String insert = "INSERT INTO registro (registro, dtHora, fkComponenteServidor) VALUES (?, ?, ?)";
         return con.update(insert, upload, formatter.format(horario), fkComponente);
 
     }
@@ -65,14 +53,13 @@ public class RegistroDao {
         return con.update(insert, download, formatter.format(horario), fkComponente);
     }
 
-    public String getFormatter() {
-        return formatter.format(horario);
+    public List<RegistroModel> selectComponente(String componente) {
+        String select = "SELECT Registro FROM tabelaregistros " +
+                "WHERE Componente = '"+componente+"' ORDER BY MomentoRegistro DESC LIMIT 1";
+        return con.query(select, new BeanPropertyRowMapper<>(RegistroModel.class));
     }
 
-
-    public List<RegistroModel> selectComponente(String componente) {
-        String select = "SELECT Componente, Registro, Símbolo FROM tabelaregistros " +
-                "WHERE Componente = '?' ORDER BY MomentoRegistro DESC LIMIT 1";
-        return con.query(select, new BeanPropertyRowMapper<>(RegistroModel.class), componente);
+    public String getFormatter() {
+        return formatter.format(horario);
     }
 }

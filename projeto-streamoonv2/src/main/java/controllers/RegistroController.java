@@ -61,7 +61,7 @@ public class RegistroController {
 
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
-        registroModel.inserirCPU(ram, fkComponent);
+        registroModel.inserirRAM(ram, fkComponent);
 
     }
 
@@ -82,9 +82,9 @@ public class RegistroController {
     }
 
     public void inserirUpload() {
-        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
+        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(0);
 
-        Double upload = Double.valueOf(redeEscolhida.getBytesRecebidos()/100000);
+        Double upload = Double.valueOf(redeEscolhida.getBytesRecebidos()/1024000);
 
         for (ComponenteModel model : componenteModel.pegarComponentePorNome("Upload")) {
             componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
@@ -98,7 +98,7 @@ public class RegistroController {
     public void inserirDownload() {
         RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
 
-        Double download = Double.valueOf(redeEscolhida.getBytesEnviados()/100000);
+        Double download = Double.valueOf(redeEscolhida.getBytesEnviados()/1024000);
 
         for (ComponenteModel model : componenteModel.pegarComponentePorNome("Download")) {
             componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
@@ -115,27 +115,27 @@ public class RegistroController {
 
         if(cpu){
             inserirCPU();
-            conjuntoDados+="CPU: 52%%\n";
+            conjuntoDados+= "CPU: "+ registroModel.selectComponente("CPU")+"%\n";
         }
 
         if(ram){
             inserirRAM();
-            conjuntoDados+="RAM: 78%%\n";
+            conjuntoDados+="RAM: "+ registroModel.selectComponente("Memoria")+"%\n";
         }
 
         if(disco){
             inserirDisco();
-            conjuntoDados+="Disco: 67%%\n";
+            conjuntoDados+="Disco: "+ registroModel.selectComponente("Disco")+"%\n";
         }
 
         if(upload){
             inserirUpload();
-            conjuntoDados+="Upload: 280MHz\n";
+            conjuntoDados+="Upload: "+registroModel.selectComponente("Upload")+"Mbps\n";
         }
 
         if(download){
             inserirDownload();
-            conjuntoDados+="Download: 340MHz\n";
+            conjuntoDados+="Download: "+registroModel.selectComponente("Download")+"Mbps\n";
         }
 
         return conjuntoDados;
