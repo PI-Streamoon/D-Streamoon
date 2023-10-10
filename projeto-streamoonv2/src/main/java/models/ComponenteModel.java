@@ -5,8 +5,11 @@ import dao.ComponenteDao;
 import java.util.List;
 
 public class ComponenteModel {
+
+    private Integer idComponenteServidor;
+    private Integer fkServidor;
     private String nome;
-    private Integer fkMedida;
+    private Integer fkUnidadeMedida;
     private Integer idComponente;
     private ComponenteDao componenteDao;
 
@@ -26,4 +29,18 @@ public class ComponenteModel {
         return componenteDao.pegarComponenteServidor(id);
     }
 
+    public Integer getIdComponenteServidor() {
+        return idComponenteServidor;
+    }
+
+    public void setIdComponenteServidor(Integer idComponenteServidor) {
+        this.idComponenteServidor = idComponenteServidor;
+    }
+
+    @Override
+    public String toString() {
+        return "ComponenteModel{" +
+                "idComponenteServidor=" + idComponenteServidor +
+                '}';
+    }
 }

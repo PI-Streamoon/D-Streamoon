@@ -4,27 +4,32 @@ import models.ComponenteModel;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComponenteDao {
 
     private JdbcTemplate con;
     private Conexao conexao;
+    private List<ComponenteModel> dadosComponente = new ArrayList<>();
 
     public ComponenteDao() {
-        this.con = conexao.getConexaoDoBanco();
         this.conexao = new Conexao();
+        this.con = conexao.getConexaoDoBanco();
     }
 
     public List<ComponenteModel> pegarComponentePorNome(String componente){
-        return (con.query(
-                "SELECT idComponente FROM componente WHERE nome = '?';",
-                new BeanPropertyRowMapper<>(ComponenteModel.class), componente));
+        dadosComponente = (con.query(
+                "SELECT idComponenteServidor FROM componenteservidor JOIN " +
+                        "componente ON fkComponente = idComponente WHERE nome = '"+componente+"' LIMIT 1",
+                new BeanPropertyRowMapper<>(ComponenteModel.class)));
+
+        return dadosComponente;
     }
 
     public List<ComponenteModel> pegarTodosComponente(){
         return (con.query(
-                "SELECT idComponente FROM componente;",
+                "SELECT idComponente FROM componente",
                 new BeanPropertyRowMapper<>(ComponenteModel.class)));
     }
 

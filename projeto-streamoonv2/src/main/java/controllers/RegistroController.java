@@ -8,8 +8,9 @@ import com.github.britooo.looca.api.group.rede.Rede;
 import com.github.britooo.looca.api.group.rede.RedeInterface;
 import com.github.britooo.looca.api.group.sistema.Sistema;
 import com.github.britooo.looca.api.group.temperatura.Temperatura;
+import models.ComponenteModel;
+import models.RegistroModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RegistroController {
@@ -22,6 +23,8 @@ public class RegistroController {
     private final Temperatura temperatura;
     private final DiscoGrupo grupoDeDiscos;
     private final Rede rede;
+    private ComponenteModel componenteModel;
+    private RegistroModel registroModel;
     // Fim dos atributos de captura de valores
 
     public RegistroController() {
@@ -31,14 +34,35 @@ public class RegistroController {
         this.temperatura = looca.getTemperatura();
         this.grupoDeDiscos = looca.getGrupoDeDiscos();
         this.rede = looca.getRede();
+        this.registroModel = new RegistroModel();
+        this.componenteModel = new ComponenteModel();
     }
 
     public Long getRamEmUso(){
         return memoria.getEmUso();
     }
 
+    public void inserirDados() {
+        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
+
+        Double download = Double.valueOf(redeEscolhida.getBytesEnviados());
+
+        for (ComponenteModel model : componenteModel.pegarComponentePorNome("Download")) {
+            componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
+        }
+        Integer fkComponent = componenteModel.getIdComponenteServidor();
+
+        registroModel.inserirDownload(download,fkComponent);
+
+//        componenteModel.pegarComponentePorNome("Download");
+        System.out.println(componenteModel.getIdComponenteServidor());
+        System.out.println("Teste");
+        System.out.println("-----------------------------------------");
+
+    }
+
     public void exibirDados(){
-        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(3);
+        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
 
         List<RedeInterface> redes = rede.getGrupoDeInterfaces().getInterfaces();
 
