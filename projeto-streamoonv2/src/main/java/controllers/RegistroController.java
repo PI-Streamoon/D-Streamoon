@@ -1,6 +1,7 @@
 package controllers;
 
 import com.github.britooo.looca.api.core.Looca;
+import com.github.britooo.looca.api.group.discos.Disco;
 import com.github.britooo.looca.api.group.discos.DiscoGrupo;
 import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
@@ -38,68 +39,102 @@ public class RegistroController {
         this.componenteModel = new ComponenteModel();
     }
 
-    public Long getRamEmUso(){
-        return memoria.getEmUso();
+    public void inserirCPU() {
+        Double cpu = Double.valueOf(processador.getUso());
+
+        for (ComponenteModel model : componenteModel.pegarComponentePorNome("CPU")) {
+            componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
+        }
+
+        Integer fkComponent = componenteModel.getIdComponenteServidor();
+
+        registroModel.inserirCPU(cpu, fkComponent);
+
     }
 
-    public void inserirDados() {
+    public void inserirRAM() {
+        Double ram = Double.valueOf((memoria.getEmUso()*100/memoria.getTotal()));
+
+        for (ComponenteModel model : componenteModel.pegarComponentePorNome("Memoria")) {
+            componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
+        }
+
+        Integer fkComponent = componenteModel.getIdComponenteServidor();
+
+        registroModel.inserirCPU(ram, fkComponent);
+
+    }
+
+    public void inserirDisco() {
+
+        List<Disco> discos = grupoDeDiscos.getDiscos();
+
+        for (ComponenteModel model : componenteModel.pegarComponentePorNome("Disco")) {
+            componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
+        }
+
+        Integer fkComponent = componenteModel.getIdComponenteServidor();
+
+        for (Disco discoAtual : discos) {
+            registroModel.inserirDisco(discoAtual.getLeituras().doubleValue(), fkComponent);
+        }
+
+    }
+
+    public void inserirUpload() {
         RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
 
-        Double download = Double.valueOf(redeEscolhida.getBytesEnviados());
+        Double upload = Double.valueOf(redeEscolhida.getBytesRecebidos()/100000);
+
+        for (ComponenteModel model : componenteModel.pegarComponentePorNome("Upload")) {
+            componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
+        }
+
+        Integer fkComponent = componenteModel.getIdComponenteServidor();
+
+        registroModel.inserirUpload(upload,fkComponent);
+    }
+
+    public void inserirDownload() {
+        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
+
+        Double download = Double.valueOf(redeEscolhida.getBytesEnviados()/100000);
 
         for (ComponenteModel model : componenteModel.pegarComponentePorNome("Download")) {
             componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
         }
+
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
         registroModel.inserirDownload(download,fkComponent);
 
-//        componenteModel.pegarComponentePorNome("Download");
-        System.out.println(componenteModel.getIdComponenteServidor());
-        System.out.println("Teste");
-        System.out.println("-----------------------------------------");
-
     }
-
-    public void exibirDados(){
-        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
-
-        List<RedeInterface> redes = rede.getGrupoDeInterfaces().getInterfaces();
-
-        for (RedeInterface redeInterface : redes) {
-            System.out.println(redeInterface);
-        }
-
-
-        System.out.println(redeEscolhida.getBytesEnviados());
-        System.out.println(redeEscolhida.getBytesRecebidos());
-
-        System.out.println(redeEscolhida);
-
-
-    }
-
 
     public String getDados(Boolean cpu,Boolean ram, Boolean disco, Boolean upload, Boolean download){
         String conjuntoDados = "";
 
         if(cpu){
+            inserirCPU();
             conjuntoDados+="CPU: 52%%\n";
         }
 
         if(ram){
+            inserirRAM();
             conjuntoDados+="RAM: 78%%\n";
         }
 
         if(disco){
+            inserirDisco();
             conjuntoDados+="Disco: 67%%\n";
         }
 
         if(upload){
+            inserirUpload();
             conjuntoDados+="Upload: 280MHz\n";
         }
 
         if(download){
+            inserirDownload();
             conjuntoDados+="Download: 340MHz\n";
         }
 

@@ -27,15 +27,4 @@ public class ComponenteDao {
         return dadosComponente;
     }
 
-    public List<ComponenteModel> pegarTodosComponente(){
-        return (con.query(
-                "SELECT idComponente FROM componente",
-                new BeanPropertyRowMapper<>(ComponenteModel.class)));
-    }
-
-        public List<ComponenteModel> pegarComponenteServidor(int id){
-        return (con.query(
-                "SELECT * FROM componenteServidor WHERE idComponenteServidor = ?",
-                new BeanPropertyRowMapper<>(ComponenteModel.class), id));
-    }
 }

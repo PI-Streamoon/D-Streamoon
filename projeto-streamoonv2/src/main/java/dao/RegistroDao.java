@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.SimpleTimeZone;
 
 public class RegistroDao {
     private JdbcTemplate con;
@@ -68,4 +69,10 @@ public class RegistroDao {
         return formatter.format(horario);
     }
 
+
+    public List<RegistroModel> selectComponente(String componente) {
+        String select = "SELECT Componente, Registro, Símbolo FROM tabelaregistros " +
+                "WHERE Componente = '?' ORDER BY MomentoRegistro DESC LIMIT 1";
+        return con.query(select, new BeanPropertyRowMapper<>(RegistroModel.class), componente);
+    }
 }

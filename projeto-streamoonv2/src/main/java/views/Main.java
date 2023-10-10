@@ -8,9 +8,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        RegistroController registroController = new RegistroController();
-
-        registroController.inserirDados();
 
         Login login = new Login();
         Integer opcaoEscolhida;

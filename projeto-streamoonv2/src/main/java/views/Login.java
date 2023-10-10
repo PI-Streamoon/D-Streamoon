@@ -67,7 +67,7 @@ public class Login {
         String dados = registroController.getDados(selecionadoCPU, selecionadoRAM, selecionadoDisco, selecionadoUpload, selecionadoDownload);
         System.out.println("""
                 @==================================@
-                |         Dados Captados da:       |
+                |         Dados Captados           |
                 @==================================@
                 %s
                 @==================================@
@@ -120,7 +120,6 @@ public class Login {
     }
 
     public void selecionarCPU(){
-
         this.selecionadoCPU = !selecionadoCPU;
     }
 
