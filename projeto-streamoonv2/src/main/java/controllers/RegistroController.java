@@ -6,6 +6,8 @@ import com.github.britooo.looca.api.group.discos.DiscoGrupo;
 import com.github.britooo.looca.api.group.discos.Volume;
 import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
+import com.github.britooo.looca.api.group.processos.Processo;
+import com.github.britooo.looca.api.group.processos.ProcessoGrupo;
 import com.github.britooo.looca.api.group.rede.Rede;
 import com.github.britooo.looca.api.group.rede.RedeInterface;
 import com.github.britooo.looca.api.group.sistema.Sistema;
@@ -24,6 +26,7 @@ public class RegistroController {
     private final Processador processador;
     private final Temperatura temperatura;
     private final DiscoGrupo grupoDeDiscos;
+    private final ProcessoGrupo processo;
     private final Rede rede;
     // Fim dos atributos de captura de valores
     private ComponenteModel componenteModel;
@@ -35,6 +38,7 @@ public class RegistroController {
         this.processador = looca.getProcessador();
         this.temperatura = looca.getTemperatura();
         this.grupoDeDiscos = looca.getGrupoDeDiscos();
+        this.processo = looca.getGrupoDeProcessos();
         this.rede = looca.getRede();
         this.registroModel = new RegistroModel();
         this.componenteModel = new ComponenteModel();
@@ -70,13 +74,6 @@ public class RegistroController {
         List<Disco> discos = grupoDeDiscos.getDiscos();
         Double totalUtilizado = 0.0;
         Double total = 0.0;
-
-        Disco discoTeste = grupoDeDiscos.getDiscos().get(0);
-        System.out.println(discoTeste);
-        List<Volume> discoTeste1 = grupoDeDiscos.getVolumes();
-        System.out.println(discoTeste1);
-        Volume discoTeste2 = grupoDeDiscos.getVolumes().get(0);
-        System.out.println(discoTeste2);
 
         for (ComponenteModel model : componenteModel.pegarComponentePorNome("Disco")) {
             componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
@@ -125,8 +122,13 @@ public class RegistroController {
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
         registroModel.inserirDadosBanco(download,fkComponent);
-
     }
+
+    public void pegarProcessos(){
+        
+    }
+
+
 
     public String getDados(Boolean cpu,Boolean ram, Boolean disco, Boolean upload, Boolean download){
         String conjuntoDados = "";
