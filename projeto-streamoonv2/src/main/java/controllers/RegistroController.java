@@ -15,6 +15,7 @@ import com.github.britooo.looca.api.group.temperatura.Temperatura;
 import models.ComponenteModel;
 import models.RegistroModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RegistroController {
@@ -26,7 +27,7 @@ public class RegistroController {
     private final Processador processador;
     private final Temperatura temperatura;
     private final DiscoGrupo grupoDeDiscos;
-    private final ProcessoGrupo processo;
+    private final ProcessoGrupo grupoDeProcesso;
     private final Rede rede;
     // Fim dos atributos de captura de valores
     private ComponenteModel componenteModel;
@@ -38,8 +39,8 @@ public class RegistroController {
         this.processador = looca.getProcessador();
         this.temperatura = looca.getTemperatura();
         this.grupoDeDiscos = looca.getGrupoDeDiscos();
-        this.processo = looca.getGrupoDeProcessos();
         this.rede = looca.getRede();
+        this.grupoDeProcesso = looca.getGrupoDeProcessos();
         this.registroModel = new RegistroModel();
         this.componenteModel = new ComponenteModel();
     }
@@ -71,28 +72,15 @@ public class RegistroController {
     }
 
     public void inserirDisco() {
-        List<Disco> discos = grupoDeDiscos.getDiscos();
-        Double totalUtilizado = 0.0;
-        Double total = 0.0;
+        List<Volume> volumes = grupoDeDiscos.getVolumes();
 
         for (ComponenteModel model : componenteModel.pegarComponentePorNome("Disco")) {
             componenteModel.setIdComponenteServidor(model.getIdComponenteServidor());
         }
-
         Integer fkComponent = componenteModel.getIdComponenteServidor();
 
-
-
-        for (Disco discoAtual : discos) {
-            total += discoAtual.getTamanho();
-            totalUtilizado += discoAtual.getTamanhoAtualDaFila();
-
-            System.out.println(discoAtual);
-        }
-
-
-        Double totalPercent = (totalUtilizado*100) / total;
-        registroModel.inserirDadosBanco(totalPercent, fkComponent);
+        Double totalDisponivel = (double)(volumes.get(0).getDisponivel())/(1e9);
+        registroModel.inserirDadosBanco(totalDisponivel, fkComponent);
 
     }
 
@@ -125,12 +113,16 @@ public class RegistroController {
     }
 
     public void pegarProcessos(){
-        
+        List<Processo> processos = grupoDeProcesso.getProcessos();
+
+        for (Processo processo : processos) {
+            System.out.println(processo);
+        }
     }
 
 
 
-    public String getDados(Boolean cpu,Boolean ram, Boolean disco, Boolean upload, Boolean download){
+    public String getDados(Boolean cpu,Boolean ram, Boolean disco, Boolean upload, Boolean download, Boolean processo){
         String conjuntoDados = "";
 
         if(cpu){
@@ -145,7 +137,7 @@ public class RegistroController {
 
         if(disco){
             inserirDisco();
-            conjuntoDados+="Disco: "+ registroModel.selectComponente("Disco")+"%\n";
+            conjuntoDados+="Disco: "+ registroModel.selectComponente("Disco")+"Gb\n";
         }
 
         if(upload){
@@ -158,8 +150,11 @@ public class RegistroController {
             conjuntoDados+="Download: "+registroModel.selectComponente("Download")+"Mbps\n";
         }
 
-        return conjuntoDados;
+        if (processo){
+            pegarProcessos();
+        }
 
+        return conjuntoDados;
     }
 
     public void exibirTituloMenu(){

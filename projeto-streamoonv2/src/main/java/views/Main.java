@@ -5,9 +5,10 @@ package views;
 import controllers.RegistroController;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Login login = new Login();
         RegistroController registroController = new RegistroController();
@@ -42,17 +43,18 @@ public class Main {
                 case 3 -> login.selecionarDisco();
                 case 4 -> login.selecionarUpload();
                 case 5 -> login.selecionarDownload();
-                case 6 -> login.selecionarTodos();
+                case 6 -> login.selecionarProcesso();
+                case 7 -> login.selecionarTodos();
             }
 
-        } while(opcaoEscolhida != 7);
+        } while(opcaoEscolhida != 8);
 
         registroController.exibirTituloMenu();
 
         do{
 
            login.menuDados();
-
+            TimeUnit.SECONDS.sleep(5);
         } while (true);
 
     }

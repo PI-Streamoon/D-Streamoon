@@ -16,6 +16,7 @@ public class Login {
     private Boolean selecionadoDisco;
     private Boolean selecionadoUpload;
     private Boolean selecionadoDownload;
+    private Boolean selecionadoProcesso;
 
     List<UsuarioModel> usuarios;
     UsuarioController usuarioController = new UsuarioController();
@@ -30,6 +31,7 @@ public class Login {
         this.selecionadoDisco = false;
         this.selecionadoUpload = false;
         this.selecionadoDownload = false;
+        this.selecionadoProcesso = false;
     }
 
     public void menuLogin() {
@@ -53,19 +55,21 @@ public class Login {
                    3 - Disco         %s                \s
                    4 - Upload        %s                \s
                    5 - Download      %s                \s
-                   6 - Todos                           \s
-                   7 - Iniciar Monitoramento           \s
+                   6 - Processos     %s                \s
+                   7 - Todos                           \s
+                   8 - Iniciar Monitoramento           \s
                 @======================================@
                 """.formatted(selecionadoCPU ? "[selecionado]": "[não selecionado]",
                               selecionadoRAM ? "[selecionado]": "[não selecionado]",
                               selecionadoDisco ? "[selecionado]": "[não selecionado]",
                               selecionadoUpload ? "[selecionado]": "[não selecionado]",
-                              selecionadoDownload ? "[selecionado]": "[não selecionado]"
+                              selecionadoDownload ? "[selecionado]": "[não selecionado]",
+                              selecionadoProcesso ? "[selecionado]": "[não selecionado]"
                 ));
     }
 
     public void menuDados(){
-        String dados = registroController.getDados(selecionadoCPU, selecionadoRAM, selecionadoDisco, selecionadoUpload, selecionadoDownload);
+        String dados = registroController.getDados(selecionadoCPU, selecionadoRAM, selecionadoDisco, selecionadoUpload, selecionadoDownload, selecionadoProcesso);
         System.out.println("""
                 %s
                 @==================================@
@@ -126,6 +130,9 @@ public class Login {
     public void selecionarDownload(){
         this.selecionadoDownload = !selecionadoDownload;
     }
+    public void selecionarProcesso(){
+        this.selecionadoProcesso = !selecionadoProcesso;
+    }
 
     public void selecionarTodos(){
         this.selecionadoCPU = true;
@@ -133,6 +140,7 @@ public class Login {
         this.selecionadoDisco = true;
         this.selecionadoUpload = true;
         this.selecionadoDownload = true;
+        this.selecionadoProcesso = true;
     }
 
     public Boolean getSelecionadoCPU() {
@@ -153,5 +161,8 @@ public class Login {
 
     public Boolean getSelecionadoDownload() {
         return selecionadoDownload;
+    }
+    public Boolean getSelecionadoProcesso() {
+        return selecionadoProcesso;
     }
 }
