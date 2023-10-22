@@ -9,19 +9,21 @@ public class UsuarioModel {
     private int empresa;
     private int admin;
     private String nome;
+    private String email;
     private String senha;
     private String cpf;
-    private String email;
 
     private UsuarioDao usuarioDao;
 
 
     public UsuarioModel() {
         this.usuarioDao = new UsuarioDao();
+//        this.email = email;
+//        this.senha = senha;
     }
 
-    public List<UsuarioModel> buscarUsuario(UsuarioModel usuarioModel) {
-        return usuarioDao.buscarUsuario(usuarioModel);
+    public List<UsuarioModel> buscarUsuario() {
+        return usuarioDao.buscarUsuario();
     }
 
     public int getId() {
@@ -95,9 +97,9 @@ public class UsuarioModel {
                 ", empresa=" + empresa +
                 ", admin=" + admin +
                 ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
                 '}';
     }
 }

@@ -77,6 +77,7 @@ public class Login {
     }
 
     public Boolean entrar() {
+
         Scanner leitor = new Scanner(System.in);
         System.out.println("Insira o seu e-mail:");
         String email = leitor.nextLine();
@@ -89,9 +90,10 @@ public class Login {
         Boolean usuarioExiste = usuarioController.buscarUsuario(email, senha);
 
         if (usuarioExiste.equals(false)) {
-            return true;
-        } else {
+            System.out.println(usuarioController.buscarUsuario(email, senha));
             return false;
+        } else {
+            return true;
         }
     }
 

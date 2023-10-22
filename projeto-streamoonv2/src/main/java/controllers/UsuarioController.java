@@ -1,8 +1,10 @@
 package controllers;
 
+
 import models.UsuarioModel;
 import java.util.ArrayList;
 import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UsuarioController {
     private List<UsuarioModel> usuarios;
@@ -13,16 +15,20 @@ public class UsuarioController {
 
     public Boolean buscarUsuario(String email, String senha){
         UsuarioModel usuarioModel = new UsuarioModel();
-        usuarioModel.setEmail(email);
-        usuarioModel.setEmail(senha);
-        List<UsuarioModel> listaUsers = usuarioModel.buscarUsuario(usuarioModel);
+        List<UsuarioModel> listaUsers = usuarioModel.buscarUsuario();
 
-        Boolean validacao;
+        Boolean validacao = false;
 
-        if(listaUsers.isEmpty()){
-            validacao = false;
-        } else {
-            validacao = true;
+
+        if(!listaUsers.isEmpty()){
+            for (UsuarioModel usuarios: listaUsers) {
+                if (usuarios.getEmail().equals(email)){
+
+                    if (BCrypt.checkpw(senha, usuarios.getSenha())){
+                        validacao = true;
+                    }
+                }
+            }
         }
 
         return validacao;

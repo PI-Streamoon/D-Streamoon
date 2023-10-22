@@ -1,7 +1,6 @@
 package controllers;
 
 import com.github.britooo.looca.api.core.Looca;
-import com.github.britooo.looca.api.group.discos.Disco;
 import com.github.britooo.looca.api.group.discos.DiscoGrupo;
 import com.github.britooo.looca.api.group.discos.Volume;
 import com.github.britooo.looca.api.group.memoria.Memoria;
@@ -15,7 +14,6 @@ import com.github.britooo.looca.api.group.temperatura.Temperatura;
 import models.ComponenteModel;
 import models.RegistroModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RegistroController {
@@ -85,7 +83,7 @@ public class RegistroController {
     }
 
     public void inserirUpload() {
-        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(3);
+        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
 
         Double upload = Double.valueOf(redeEscolhida.getBytesRecebidos()/(1024* 1024));
 
@@ -99,7 +97,7 @@ public class RegistroController {
     }
 
     public void inserirDownload() {
-        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(3);
+        RedeInterface redeEscolhida = rede.getGrupoDeInterfaces().getInterfaces().get(1);
 
         Double download = Double.valueOf(redeEscolhida.getBytesEnviados()/(1024* 1024));
 

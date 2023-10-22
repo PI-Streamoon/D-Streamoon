@@ -4,22 +4,26 @@ import models.UsuarioModel;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDao {
     private JdbcTemplate con;
     private Conexao conexao = new Conexao();
 
+    private List<UsuarioModel> usuarios;
     public UsuarioDao(){
         this.con = conexao.getConexaoDoBanco();
+        this.usuarios = new ArrayList<>();
     }
 
-    public List<UsuarioModel> buscarUsuario(UsuarioModel usuarioModel){
-        String email = usuarioModel.getEmail();
-        String senha = usuarioModel.getSenha();
+    public List<UsuarioModel> buscarUsuario(){
 
-        return con.query(
-                "SELECT nome,senha,cpf,email  FROM usuario WHERE email = ? AND senha = ?;",
-                new BeanPropertyRowMapper<>(UsuarioModel.class), email, senha);
+        usuarios = con.query(
+                "SELECT * FROM usuario",
+                new BeanPropertyRowMapper<>(UsuarioModel.class));
+
+        return usuarios;
     }
+
 }
