@@ -24,38 +24,35 @@ public class Main {
                 loginValidado = login.entrar();
 
                 if(loginValidado){
-                    break;
+                    do {
+
+                        login.menuMonitoramento();
+                        opcaoEscolhida = leitor.nextInt();
+
+                        switch (opcaoEscolhida){
+                            case 1 -> login.selecionarCPU();
+                            case 2 -> login.selecionarRAM();
+                            case 3 -> login.selecionarDisco();
+                            case 4 -> login.selecionarUpload();
+                            case 5 -> login.selecionarDownload();
+                            case 6 -> login.selecionarProcesso();
+                            case 7 -> login.selecionarTodos();
+                        }
+
+                    } while(opcaoEscolhida != 8);
+
+                    registroController.exibirTituloMenu();
+
+                    do{
+
+                        login.menuDados();
+                        TimeUnit.SECONDS.sleep(5);
+                    } while (true);
                 }
 
             }
 
         } while (opcaoEscolhida != 2);
-
-
-        do {
-
-            login.menuMonitoramento();
-            opcaoEscolhida = leitor.nextInt();
-
-            switch (opcaoEscolhida){
-                case 1 -> login.selecionarCPU();
-                case 2 -> login.selecionarRAM();
-                case 3 -> login.selecionarDisco();
-                case 4 -> login.selecionarUpload();
-                case 5 -> login.selecionarDownload();
-                case 6 -> login.selecionarProcesso();
-                case 7 -> login.selecionarTodos();
-            }
-
-        } while(opcaoEscolhida != 8);
-
-        registroController.exibirTituloMenu();
-
-        do{
-
-           login.menuDados();
-            TimeUnit.SECONDS.sleep(5);
-        } while (true);
 
     }
 }

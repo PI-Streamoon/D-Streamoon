@@ -90,7 +90,11 @@ public class Login {
         Boolean usuarioExiste = usuarioController.buscarUsuario(email, senha);
 
         if (usuarioExiste.equals(false)) {
-            System.out.println(usuarioController.buscarUsuario(email, senha));
+            System.out.println("""
+                    @======================================@
+                    |   Usuário não cadastrado!            |
+                    @--------------------------------------@
+                    """);
             return false;
         } else {
             return true;
