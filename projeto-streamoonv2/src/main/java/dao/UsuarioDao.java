@@ -17,11 +17,11 @@ public class UsuarioDao {
         this.usuarios = new ArrayList<>();
     }
 
-    public List<UsuarioModel> buscarUsuario(){
+    public List<UsuarioModel> buscarUsuario(String email){
 
-        usuarios = con.query(
-                "SELECT * FROM usuario",
-                new BeanPropertyRowMapper<>(UsuarioModel.class));
+        usuarios = (con.query(
+                "SELECT * FROM usuario WHERE email= ?",
+                new BeanPropertyRowMapper<>(UsuarioModel.class), email));
 
         return usuarios;
     }

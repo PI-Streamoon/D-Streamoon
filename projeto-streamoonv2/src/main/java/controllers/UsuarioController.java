@@ -15,19 +15,19 @@ public class UsuarioController {
 
     public Boolean buscarUsuario(String email, String senha){
         UsuarioModel usuarioModel = new UsuarioModel();
-        List<UsuarioModel> listaUsers = usuarioModel.buscarUsuario();
+        List<UsuarioModel> listaUsers = usuarioModel.buscarUsuario(email);
 
         Boolean validacao = false;
 
 
         if(!listaUsers.isEmpty()){
             for (UsuarioModel usuarios: listaUsers) {
-                if (usuarios.getEmail().equals(email)){
+//                if (usuarios.getEmail().equals(email)){
 
                     if (BCrypt.checkpw(senha, usuarios.getSenha())){
                         validacao = true;
                     }
-                }
+//                }
             }
         }
 

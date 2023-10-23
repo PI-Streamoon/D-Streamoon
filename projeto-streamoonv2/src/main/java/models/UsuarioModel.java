@@ -22,8 +22,8 @@ public class UsuarioModel {
 //        this.senha = senha;
     }
 
-    public List<UsuarioModel> buscarUsuario() {
-        return usuarioDao.buscarUsuario();
+    public List<UsuarioModel> buscarUsuario(String email) {
+        return usuarioDao.buscarUsuario(email);
     }
 
     public int getId() {
