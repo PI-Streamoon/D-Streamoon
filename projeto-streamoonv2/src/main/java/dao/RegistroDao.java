@@ -23,7 +23,7 @@ public class RegistroDao {
         this.con = conexao.getConexaoDoBanco();
         this.horario = LocalDateTime.now();
         this.local = new Locale("pt","BR");
-        this.formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss",local);
+        this.formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss",local);
         this.componenteDao = new ComponenteDao();
     }
 
