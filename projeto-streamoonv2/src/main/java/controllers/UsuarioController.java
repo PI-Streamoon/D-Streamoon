@@ -8,6 +8,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class UsuarioController {
     private List<UsuarioModel> usuarios;
+    public static UsuarioModel usuarioLogado;
 
     public UsuarioController() {
         this.usuarios = new ArrayList<>();
@@ -26,6 +27,7 @@ public class UsuarioController {
 
                     if (BCrypt.checkpw(senha, usuarios.getSenha())){
                         validacao = true;
+                        usuarioLogado = usuarios;
                     }
 //                }
             }

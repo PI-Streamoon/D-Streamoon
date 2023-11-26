@@ -9,11 +9,11 @@ import java.util.List;
 
 public class UsuarioDao {
     private JdbcTemplate con;
-    private Conexao conexao = new Conexao();
+    private ConexaoSQLServer conexaoSQLServer = new ConexaoSQLServer();
 
     private List<UsuarioModel> usuarios;
     public UsuarioDao(){
-        this.con = conexao.getConexaoDoBanco();
+        this.con = conexaoSQLServer.getConexaoDoBanco();
         this.usuarios = new ArrayList<>();
     }
 

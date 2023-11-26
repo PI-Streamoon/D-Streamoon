@@ -3,9 +3,9 @@ package dao;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class Conexao {
+public class ConexaoMySQL {
     private JdbcTemplate conexaoDoBanco;
-    public Conexao() {
+    public ConexaoMySQL() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setDatabaseName("streamoon");
         dataSource.setUser("StreamoonUser");

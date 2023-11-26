@@ -29,6 +29,22 @@ public class ComponenteModel {
         this.idComponenteServidor = idComponenteServidor;
     }
 
+
+    public Integer getFkServidor() {
+        return fkServidor;
+    }
+
+    public void setFkServidor(Integer fkServidor) {
+        this.fkServidor = fkServidor;
+    }
+
+    public Integer getIdComponente() {
+        return idComponente;
+    }
+
+    public void setIdComponente(Integer idComponente) {
+        this.idComponente = idComponente;
+    }
     @Override
     public String toString() {
         return "ComponenteModel{" +

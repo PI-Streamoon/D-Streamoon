@@ -3,6 +3,7 @@ package views;
 // Necessita de import pois estão em pacotes diferetes
 
 import controllers.RegistroController;
+import utils.CheckServer;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -11,6 +12,8 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         Login login = new Login();
+
+
         RegistroController registroController = new RegistroController();
         int opcaoEscolhida;
         Boolean loginValidado;
@@ -24,6 +27,8 @@ public class Main {
                 loginValidado = login.entrar();
 
                 if(loginValidado){
+                    CheckServer checkServer = new CheckServer();
+
                     do {
 
                         login.menuMonitoramento();

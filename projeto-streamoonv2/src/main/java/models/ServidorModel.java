@@ -1,11 +1,13 @@
 package models;
 
-import dao.ServidorDao;
 import java.util.List;
+import dao.ServidorDao;
 
 public class ServidorModel {
     private Integer idServidor;
     private Integer fkLocal;
+
+    private String enderecoMAC;
     private ServidorDao servidorDao = new ServidorDao();
 
     public ServidorModel() {
@@ -20,7 +22,36 @@ public class ServidorModel {
         return servidorDao.pegarServidoresPorId(id);
     }
 
+    public void cadastrarServidor(Integer fkLocal, String enderecoMAC){
+        servidorDao.cadastrarServidor(fkLocal, enderecoMAC);
+    }
+
+
     public List<ServidorModel> pegarServidoresPorLocal(int idLocal){
         return servidorDao.pegarServidoresPorId(idLocal);
+    }
+
+    public Integer getIdServidor() {
+        return idServidor;
+    }
+
+    public Integer getFkLocal() {
+        return fkLocal;
+    }
+
+    public String getEnderecoMAC() {
+        return enderecoMAC;
+    }
+
+    public void setIdServidor(Integer idServidor) {
+        this.idServidor = idServidor;
+    }
+
+    public void setFkLocal(Integer fkLocal) {
+        this.fkLocal = fkLocal;
+    }
+
+    public void setEnderecoMAC(String enderecoMAC) {
+        this.enderecoMAC = enderecoMAC;
     }
 }

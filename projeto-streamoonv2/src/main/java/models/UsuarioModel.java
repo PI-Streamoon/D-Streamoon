@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UsuarioModel {
     private int id;
-    private int empresa;
+    private int fkEmpresa;
     private int admin;
     private String nome;
     private String email;
@@ -34,12 +34,12 @@ public class UsuarioModel {
         this.id = id;
     }
 
-    public int getEmpresa() {
-        return empresa;
+    public int getFkEmpresa() {
+        return fkEmpresa;
     }
 
-    public void setEmpresa(int empresa) {
-        this.empresa = empresa;
+    public void setFkEmpresa(int fkEmpresa) {
+        this.fkEmpresa = fkEmpresa;
     }
 
     public int getAdmin() {
@@ -94,7 +94,7 @@ public class UsuarioModel {
     public String toString() {
         return "Usuario{" +
                 "id=" + id +
-                ", empresa=" + empresa +
+                ", fkEmpresa=" + fkEmpresa +
                 ", admin=" + admin +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
