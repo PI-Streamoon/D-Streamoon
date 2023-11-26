@@ -1,5 +1,2 @@
-package controllers;
-
-public class ServidorController {
-
+package controllers;public class ServidorController {
 }
